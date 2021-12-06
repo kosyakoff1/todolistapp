@@ -7,7 +7,6 @@
     android:padding="24dp"
     tools:context=".fragments.add.AddFragment">
 
-
     <EditText
         android:id="@+id/title_et"
         android:layout_width="0dp"
@@ -22,7 +21,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Name" />
+        tools:text="Name"
+        android:importantForAutofill="no"/>
 
     <Spinner
         android:id="@+id/priorities_spinner"
@@ -53,5 +53,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priorities_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/priorities_spinner"
+        android:importantForAutofill="no" />
 </androidx.constraintlayout.widget.ConstraintLayout>

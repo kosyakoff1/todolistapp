@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/listLayout"
     tools:context=".fragments.list.ListFragment">
 
 
@@ -27,7 +28,8 @@
         android:src="@drawable/ic_add"
         android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/no_data_image_view"
@@ -40,7 +42,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recyclerView"
         app:layout_constraintVertical_bias="0.37"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        android:contentDescription="@string/no_data" />
 
     <TextView
         android:id="@+id/no_data_text_view"
