@@ -14,6 +14,7 @@
         android:background="@android:color/transparent"
         android:ems="10"
         android:hint="@string/scn_add_et_hint_title"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:paddingHorizontal="24dp"
         android:paddingTop="16dp"
@@ -21,8 +22,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Name"
-        android:importantForAutofill="no"/>
+        tools:text="Name" />
 
     <Spinner
         android:id="@+id/priorities_spinner"
@@ -46,6 +46,7 @@
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/scn_add_et_hint_description"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:paddingHorizontal="24dp"
         android:paddingTop="16dp"
@@ -53,6 +54,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priorities_spinner"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/priorities_spinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,11 @@
     <string name="updateFragmentTitle">Update record</string>
     <string name="scn_add_et_hint_title">Title</string>
     <string name="scn_add_et_hint_description">Description</string>
+    <string name="scn_list_fragment_menu_search">Search</string>
+    <string name="scn_list_fragment_menu_sort_by">Sort by</string>
+    <string name="scn_list_fragment_menu_priority_high">Priority High</string>
+    <string name="scn_list_fragment_menu_priority_low">Priority Low</string>
+    <string name="scn_list_fragment_menu_delete_all">Delete All</string>
 
 
     <string-array name="priorities">
