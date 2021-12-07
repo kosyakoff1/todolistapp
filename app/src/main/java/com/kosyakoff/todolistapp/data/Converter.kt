@@ -1,6 +1,7 @@
 package com.kosyakoff.todolistapp.data
 
 import androidx.room.TypeConverter
+import com.kosyakoff.todolistapp.data.models.Priority
 
 class Converter {
 
