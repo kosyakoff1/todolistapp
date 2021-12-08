@@ -16,6 +16,8 @@
     <string name="scn_add_fragment_menu_add">Add</string>
     <string name="scn_update_fragment_menu_save">Save</string>
     <string name="scn_update_fragment_menu_delete">Delete</string>
+    <string name="frg_add_txt_record_added">Record added</string>
+    <string name="frg_add_txt_fill_all">Please, fill out all fields</string>
 
 
     <string-array name="priorities">
