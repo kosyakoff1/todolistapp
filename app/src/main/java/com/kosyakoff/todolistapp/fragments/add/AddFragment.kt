@@ -26,6 +26,8 @@ class AddFragment : Fragment() {
 
         inflater.inflate(R.layout.fragment_add, container, false)
         binding = FragmentAddBinding.inflate(layoutInflater, container, false)
+        binding.prioritiesSpinner.onItemSelectedListener = sharedViewModel.listener
+
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         return binding.root
