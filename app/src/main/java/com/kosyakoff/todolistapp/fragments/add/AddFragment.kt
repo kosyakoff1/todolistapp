@@ -11,16 +11,18 @@ import com.kosyakoff.todolistapp.data.models.Priority
 import com.kosyakoff.todolistapp.data.models.ToDoData
 import com.kosyakoff.todolistapp.data.viewmodel.ToDoViewModel
 import com.kosyakoff.todolistapp.databinding.FragmentAddBinding
+import com.kosyakoff.todolistapp.fragments.SharedViewModel
 
 class AddFragment : Fragment() {
 
     private val toDoViewModel: ToDoViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by viewModels()
 
     private lateinit var binding: FragmentAddBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
 
         inflater.inflate(R.layout.fragment_add, container, false)
         binding = FragmentAddBinding.inflate(layoutInflater, container, false)
@@ -46,10 +48,11 @@ class AddFragment : Fragment() {
             val priority = prioritiesSpinner.selectedItem.toString()
             val description = descriptionEt.text.toString()
 
-            val validation = verifyDataFromUser(title, description)
+            val validation = sharedViewModel.verifyDataFromUser(title, description)
 
             if (validation) {
-                val newData = ToDoData(0, title, priority.parsePriorityString(), description)
+                val newData =
+                    ToDoData(0, title, sharedViewModel.parsePriorityString(priority), description)
                 toDoViewModel.insertData(newData)
                 Toast.makeText(
                     requireContext(),
@@ -66,13 +69,5 @@ class AddFragment : Fragment() {
             }
         }
     }
-
-    private fun String.parsePriorityString(): Priority {
-        val index = resources.getStringArray(R.array.priorities).indexOfFirst { x -> x == this }
-        return Priority.values()[index]
-    }
-
-    private fun verifyDataFromUser(title: String, description: String): Boolean =
-        title.isNotEmpty() && description.isNotEmpty()
 
 }

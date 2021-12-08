@@ -9,7 +9,7 @@ import com.kosyakoff.todolistapp.data.repository.ToDoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ToDoViewModel(application: Application) : AndroidViewModel(application) {
+class ToDoViewModel constructor(application: Application) : AndroidViewModel(application) {
     private val toDoDao = ToDoDatabase.getDatabase(application).toDoDao()
     private val repository: ToDoRepository = ToDoRepository(toDoDao)
 
@@ -17,7 +17,7 @@ class ToDoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insertData(toDoData: ToDoData) {
         viewModelScope.launch(Dispatchers.IO) {
-            viewModelScope.launch(Dispatchers.IO) { }
+            repository.insertData(toDoData)
         }
     }
 
