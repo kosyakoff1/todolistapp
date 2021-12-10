@@ -3,21 +3,34 @@ package com.kosyakoff.todolistapp.fragments.list
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kosyakoff.todolistapp.R
+import com.kosyakoff.todolistapp.data.viewmodel.ToDoViewModel
 import com.kosyakoff.todolistapp.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
 
-    private var _binding: FragmentListBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentListBinding
+    private val listAdapter: ListAdapter by lazy { ListAdapter() }
+    private val toDoViewModel: ToDoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentListBinding.inflate(layoutInflater, container, false)
+        binding = FragmentListBinding.inflate(layoutInflater, container, false)
+
+        binding.recyclerView.apply {
+            adapter = listAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        toDoViewModel.getAllData.observe(viewLifecycleOwner) { data ->
+            listAdapter.setData(data)
+        }
 
         binding.apply {
             floatingActionButton.setOnClickListener {

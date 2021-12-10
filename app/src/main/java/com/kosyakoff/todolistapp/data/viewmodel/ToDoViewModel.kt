@@ -13,7 +13,7 @@ class ToDoViewModel constructor(application: Application) : AndroidViewModel(app
     private val toDoDao = ToDoDatabase.getDatabase(application).toDoDao()
     private val repository: ToDoRepository = ToDoRepository(toDoDao)
 
-    private val getAllData = repository.getAllData
+    val getAllData = repository.getAllData
 
     fun insertData(toDoData: ToDoData) {
         viewModelScope.launch(Dispatchers.IO) {

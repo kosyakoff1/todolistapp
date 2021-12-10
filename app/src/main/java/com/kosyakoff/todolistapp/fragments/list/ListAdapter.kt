@@ -2,6 +2,7 @@ package com.kosyakoff.todolistapp.fragments.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kosyakoff.todolistapp.R
 import com.kosyakoff.todolistapp.data.models.Priority
@@ -24,13 +25,13 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
             descriptionTxt.text = item.description
             val priorityColor = when (item.priority) {
                 Priority.HIGH -> {
-                    R.color.red
+                    ContextCompat.getColor(priorityIndicator.context, R.color.red)
                 }
                 Priority.MEDIUM -> {
-                    R.color.yellow
+                    ContextCompat.getColor(priorityIndicator.context, R.color.yellow)
                 }
                 Priority.LOW -> {
-                    R.color.green
+                    ContextCompat.getColor(priorityIndicator.context, R.color.green)
                 }
             }
             priorityIndicator.setCardBackgroundColor(priorityColor)
