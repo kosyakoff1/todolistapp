@@ -27,7 +27,6 @@ class ListFragment : Fragment() {
             adapter = listAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-
         toDoViewModel.getAllData.observe(viewLifecycleOwner) { data ->
             listAdapter.setData(data)
         }
@@ -35,10 +34,6 @@ class ListFragment : Fragment() {
         binding.apply {
             floatingActionButton.setOnClickListener {
                 findNavController().navigate(R.id.action_listFragment_to_addFragment)
-            }
-
-            listLayout.setOnClickListener {
-                findNavController().navigate(R.id.action_listFragment_to_updateFragment)
             }
         }
 

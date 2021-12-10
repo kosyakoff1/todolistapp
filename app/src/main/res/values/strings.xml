@@ -18,6 +18,8 @@
     <string name="scn_update_fragment_menu_delete">Delete</string>
     <string name="frg_add_txt_record_added">Record added</string>
     <string name="frg_add_txt_fill_all">Please, fill out all fields</string>
+    <string name="frg_update_txt_record_updated">Successfully updated</string>
+    <string name="frg_update_txt_fill_all">Please, fill out all fields</string>
 
 
     <string-array name="priorities">

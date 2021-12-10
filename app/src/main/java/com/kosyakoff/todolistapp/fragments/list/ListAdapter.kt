@@ -3,6 +3,8 @@ package com.kosyakoff.todolistapp.fragments.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.kosyakoff.todolistapp.R
 import com.kosyakoff.todolistapp.data.models.Priority
@@ -23,6 +25,10 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
             val item = dataList[position]
             titleTxt.text = item.title
             descriptionTxt.text = item.description
+            rowBackground.setOnClickListener {
+                holder.itemView.findNavController()
+                    .navigate(ListFragmentDirections.actionListFragmentToUpdateFragment(item))
+            }
             val priorityColor = when (item.priority) {
                 Priority.HIGH -> {
                     ContextCompat.getColor(priorityIndicator.context, R.color.red)
