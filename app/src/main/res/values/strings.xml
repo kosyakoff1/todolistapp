@@ -19,7 +19,14 @@
     <string name="frg_add_txt_record_added">Record added</string>
     <string name="frg_add_txt_fill_all">Please, fill out all fields</string>
     <string name="frg_update_txt_record_updated">Successfully updated</string>
+    <string name="frg_update_txt_record_removed">Successfully removed</string>
     <string name="frg_update_txt_fill_all">Please, fill out all fields</string>
+    <string name="frg_update_txt_question_delete">"Are you sure you want to delete '%1$s'?</string>
+    <string name="frg_update_txt_question_delete_simple">"Delete '%1$s'?</string>
+    <string name="frg_list_txt_question_delete">"Are you sure you want to delete all records?</string>
+    <string name="frg_list_txt_question_delete_simple">"Delete all?</string>
+    <string name="frg_update_txt_question_yes">Yes</string>
+    <string name="frg_update_txt_question_no">No</string>
 
 
     <string-array name="priorities">

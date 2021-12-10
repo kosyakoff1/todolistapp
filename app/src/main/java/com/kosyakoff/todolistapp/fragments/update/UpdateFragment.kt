@@ -1,5 +1,7 @@
 package com.kosyakoff.todolistapp.fragments.update
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -50,11 +52,33 @@ class UpdateFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_save) {
-            updateItem()
-            return true
+
+        when (item.itemId) {
+            R.id.menu_save -> updateItem()
+            R.id.menu_delete -> confirmItemRemoval()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun confirmItemRemoval() {
+        val builder = AlertDialog.Builder(requireContext())
+
+        with(builder) {
+            setPositiveButton(getString(R.string.frg_update_txt_question_yes)) { _, _ ->
+                toDoViewModel.deleteData(args.currentItem)
+                Toast.makeText(requireContext(),
+                    getString(R.string.frg_update_txt_record_removed),
+                    Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            }
+            setNegativeButton(R.string.frg_update_txt_question_no) { _, _ -> }
+            setTitle(String.format(getString(R.string.frg_update_txt_question_delete_simple),
+                args.currentItem.title))
+            setMessage(String.format(getString(R.string.frg_update_txt_question_delete),
+                args.currentItem.title))
+            create().show()
+        }
+
     }
 
     private fun updateItem() {
