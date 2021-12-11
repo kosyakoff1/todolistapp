@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,7 +18,7 @@ import com.kosyakoff.todolistapp.databinding.FragmentListBinding
 import com.kosyakoff.todolistapp.fragments.list.adapter.ListAdapter
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentListBinding
     private val listAdapter: ListAdapter by lazy { ListAdapter() }
@@ -44,18 +45,6 @@ class ListFragment : Fragment() {
 
         setHasOptionsMenu(true)
         return binding.root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.list_fragment_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        if (item.itemId == R.id.menu_delete_all) {
-            confirmRemoval()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun addSwipeToDelete(recyclerView: RecyclerView) {
@@ -106,6 +95,43 @@ class ListFragment : Fragment() {
             setMessage(getString(R.string.frg_list_txt_question_delete))
             create().show()
         }
+    }
+
+    private fun searchInDb(query: String) {
+        toDoViewModel.searchDatabase(query).observe(this) {
+            listAdapter.setData(it)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_fragment_menu, menu)
+
+        (menu.findItem(R.id.menu_search).actionView as? SearchView)?.apply {
+            isSubmitButtonEnabled = true
+            setOnQueryTextListener(this@ListFragment)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == R.id.menu_delete_all) {
+            confirmRemoval()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null) {
+            searchInDb(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (query != null) {
+            searchInDb(query)
+        }
+        return true
     }
 
 }

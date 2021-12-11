@@ -2,6 +2,7 @@ package com.kosyakoff.todolistapp.data.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.kosyakoff.todolistapp.data.ToDoDatabase
 import com.kosyakoff.todolistapp.data.models.ToDoData
@@ -38,5 +39,7 @@ class ToDoViewModel constructor(application: Application) : AndroidViewModel(app
             repository.deleteAll()
         }
     }
+
+    fun searchDatabase(query: String): LiveData<List<ToDoData>> = repository.searchDatabase(query)
 
 }
