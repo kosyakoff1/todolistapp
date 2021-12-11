@@ -1,15 +1,15 @@
-package com.kosyakoff.todolistapp.fragments.list
+package com.kosyakoff.todolistapp.fragments.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.kosyakoff.todolistapp.R
 import com.kosyakoff.todolistapp.data.models.Priority
 import com.kosyakoff.todolistapp.data.models.ToDoData
 import com.kosyakoff.todolistapp.databinding.RowLayoutBinding
+import com.kosyakoff.todolistapp.fragments.list.ListFragmentDirections
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
@@ -51,6 +51,8 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         dataList = list
         notifyDataSetChanged()
     }
+
+    fun getItem(index: Int): ToDoData = dataList[index]
 
     class MyViewHolder(val binding: RowLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
