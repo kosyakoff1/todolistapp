@@ -2,13 +2,13 @@ package com.kosyakoff.todolistapp.fragments.list
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -18,6 +18,7 @@ import com.kosyakoff.todolistapp.data.viewmodel.ToDoViewModel
 import com.kosyakoff.todolistapp.databinding.FragmentListBinding
 import com.kosyakoff.todolistapp.fragments.list.adapter.ListAdapter
 import com.kosyakoff.todolistapp.util.hideKeyboard
+import com.kosyakoff.todolistapp.util.observeOnce
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 
 class ListFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -102,7 +103,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun searchInDb(query: String) {
-        toDoViewModel.searchDatabase(query).observe(viewLifecycleOwner) {
+        toDoViewModel.searchDatabase(query).observeOnce(viewLifecycleOwner) {
             listAdapter.setData(it)
         }
     }
