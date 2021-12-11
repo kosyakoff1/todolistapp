@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.kosyakoff.todolistapp.R
 import com.kosyakoff.todolistapp.data.models.ToDoData
@@ -36,7 +37,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.recyclerView.apply {
             itemAnimator = ScaleInAnimator().apply { addDuration = 150 }
             adapter = listAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             addSwipeToDelete(this)
         }
         toDoViewModel.getAllData.observe(viewLifecycleOwner) { data ->
