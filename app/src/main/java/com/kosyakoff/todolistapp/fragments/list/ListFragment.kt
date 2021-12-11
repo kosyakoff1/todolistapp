@@ -15,6 +15,7 @@ import com.kosyakoff.todolistapp.data.models.ToDoData
 import com.kosyakoff.todolistapp.data.viewmodel.ToDoViewModel
 import com.kosyakoff.todolistapp.databinding.FragmentListBinding
 import com.kosyakoff.todolistapp.fragments.list.adapter.ListAdapter
+import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 
 class ListFragment : Fragment() {
 
@@ -32,6 +33,7 @@ class ListFragment : Fragment() {
         binding.todoViewModel = toDoViewModel
 
         binding.recyclerView.apply {
+            itemAnimator = ScaleInAnimator().apply { addDuration = 150 }
             adapter = listAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addSwipeToDelete(this)
@@ -71,11 +73,8 @@ class ListFragment : Fragment() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val deletedItem = listAdapter.getItem(viewHolder.adapterPosition)
                     toDoViewModel.deleteData(deletedItem)
-                    listAdapter.notifyItemRemoved(viewHolder.adapterPosition)
-
                     showRestoreDeletedDataSnackBar(viewHolder.itemView,
-                        deletedItem,
-                        viewHolder.adapterPosition)
+                        deletedItem)
                 }
             }
 
@@ -83,11 +82,10 @@ class ListFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
-    private fun showRestoreDeletedDataSnackBar(view: View, deletedItem: ToDoData, position: Int) {
+    private fun showRestoreDeletedDataSnackBar(view: View, deletedItem: ToDoData) {
         Snackbar.make(view, "Deleted '${deletedItem.title}'", Snackbar.LENGTH_SHORT).apply {
             setAction("Undo") {
                 toDoViewModel.insertData(deletedItem)
-                listAdapter.notifyItemChanged(position)
             }
             show()
         }
