@@ -28,7 +28,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        // Inflate the layout for this fragment
+
         binding = FragmentListBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.todoViewModel = toDoViewModel
@@ -98,7 +98,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun searchInDb(query: String) {
-        toDoViewModel.searchDatabase(query).observe(this) {
+        toDoViewModel.searchDatabase(query).observe(viewLifecycleOwner) {
             listAdapter.setData(it)
         }
     }
@@ -114,8 +114,20 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        if (item.itemId == R.id.menu_delete_all) {
-            confirmRemoval()
+        when (item.itemId) {
+            R.id.menu_delete_all -> {
+                confirmRemoval()
+            }
+            R.id.menu_priority_high -> {
+                toDoViewModel.sortByHighPriority.observe(viewLifecycleOwner) {
+                    listAdapter.setData(it)
+                }
+            }
+            R.id.menu_priority_low -> {
+                toDoViewModel.sortByLowPriority.observe(viewLifecycleOwner) {
+                    listAdapter.setData(it)
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
     }
