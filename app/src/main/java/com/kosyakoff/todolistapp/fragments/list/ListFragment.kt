@@ -17,6 +17,7 @@ import com.kosyakoff.todolistapp.data.models.ToDoData
 import com.kosyakoff.todolistapp.data.viewmodel.ToDoViewModel
 import com.kosyakoff.todolistapp.databinding.FragmentListBinding
 import com.kosyakoff.todolistapp.fragments.list.adapter.ListAdapter
+import com.kosyakoff.todolistapp.util.hideKeyboard
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 
 class ListFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -43,6 +44,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         toDoViewModel.getAllData.observe(viewLifecycleOwner) { data ->
             listAdapter.setData(data)
         }
+
+        hideKeyboard(requireActivity())
 
         setHasOptionsMenu(true)
         return binding.root
